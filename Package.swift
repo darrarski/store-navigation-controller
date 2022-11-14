@@ -11,12 +11,14 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", branch: "navigation"),
+    .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.0.3")),
   ],
   targets: [
     .target(
       name: "StoreNavigationController",
       dependencies: [
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+        .product(name: "Collections", package: "swift-collections"),
       ]
     ),
     .testTarget(
