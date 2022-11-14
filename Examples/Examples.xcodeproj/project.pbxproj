@@ -13,6 +13,8 @@
 		31BD499129224D4800345FE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31BD499029224D4800345FE1 /* Assets.xcassets */; };
 		31BD499429224D4900345FE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31BD499229224D4900345FE1 /* LaunchScreen.storyboard */; };
 		31BD499D2922510A00345FE1 /* StoreNavigationController in Frameworks */ = {isa = PBXBuildFile; productRef = 31BD499C2922510A00345FE1 /* StoreNavigationController */; };
+		31BD499F292268B700345FE1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD499E292268B700345FE1 /* Timer.swift */; };
+		31BD49A129226E0500345FE1 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD49A029226E0500345FE1 /* Counter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		31BD499029224D4800345FE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		31BD499329224D4900345FE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		31BD499529224D4900345FE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31BD499E292268B700345FE1 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		31BD49A029226E0500345FE1 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				31BD498729224D4800345FE1 /* AppDelegate.swift */,
 				31BD498929224D4800345FE1 /* SceneDelegate.swift */,
 				31BD498B29224D4800345FE1 /* Example.swift */,
+				31BD49A029226E0500345FE1 /* Counter.swift */,
+				31BD499E292268B700345FE1 /* Timer.swift */,
 				31BD499029224D4800345FE1 /* Assets.xcassets */,
 				31BD499229224D4900345FE1 /* LaunchScreen.storyboard */,
 				31BD499529224D4900345FE1 /* Info.plist */,
@@ -147,9 +153,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31BD49A129226E0500345FE1 /* Counter.swift in Sources */,
 				31BD498C29224D4800345FE1 /* Example.swift in Sources */,
 				31BD498829224D4800345FE1 /* AppDelegate.swift in Sources */,
 				31BD498A29224D4800345FE1 /* SceneDelegate.swift in Sources */,
+				31BD499F292268B700345FE1 /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,7 +226,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -275,7 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
