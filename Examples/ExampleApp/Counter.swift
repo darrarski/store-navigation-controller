@@ -38,7 +38,6 @@ final class CounterViewController: UIViewController {
     self.store = store
     self.viewStore = ViewStore(store)
     super.init(nibName: nil, bundle: nil)
-    title = "Counter"
   }
 
   required init?(coder: NSCoder) {
@@ -92,6 +91,7 @@ final class CounterViewController: UIViewController {
       .removeDuplicates()
       .sink { [unowned self] value in
         counterLabel.text = "\(value)"
+        navigationItem.title = "Counter (\(value))"
       }
       .store(in: &cancellables)
 

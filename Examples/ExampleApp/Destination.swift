@@ -59,9 +59,8 @@ final class DestinationViewController: UIViewController, NavigationStateElementV
   let viewStore: ViewStoreOf<Destination>
   var cancellables = Set<AnyCancellable>()
 
-  override var title: String? {
-    get { viewController?.title }
-    set { viewController?.title = newValue }
+  override var navigationItem: UINavigationItem {
+    viewController?.navigationItem ?? super.navigationItem
   }
 
   var viewController: UIViewController? {

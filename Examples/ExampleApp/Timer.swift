@@ -52,7 +52,6 @@ final class TimerViewController: UIViewController {
     self.store = store
     self.viewStore = ViewStore(store)
     super.init(nibName: nil, bundle: nil)
-    title = "Timer"
   }
 
   required init?(coder: NSCoder) {
@@ -97,6 +96,7 @@ final class TimerViewController: UIViewController {
       .removeDuplicates()
       .sink { [unowned self] value in
         timerLabel.text = "\(value)"
+        navigationItem.title = "Timer (\(value))"
       }
       .store(in: &cancellables)
 
