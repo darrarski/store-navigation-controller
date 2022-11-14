@@ -3,7 +3,7 @@ import ComposableArchitecture
 import UIKit
 
 struct Timer: ReducerProtocol {
-  struct State: Equatable {
+  struct State: Equatable, Hashable {
     var value = 0
     var isTimerRunning = false
   }

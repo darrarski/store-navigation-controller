@@ -3,7 +3,7 @@ import ComposableArchitecture
 import UIKit
 
 struct Counter: ReducerProtocol {
-  struct State: Equatable {
+  struct State: Equatable, Hashable {
     var value = 0
   }
 
