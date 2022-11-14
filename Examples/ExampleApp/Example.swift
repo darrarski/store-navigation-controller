@@ -3,12 +3,36 @@ import StoreNavigationController
 import UIKit
 
 struct Example: ReducerProtocol {
-  struct State: Equatable {}
+  struct State: Equatable {
+    @NavigationStateOf<Destination> var navigation
+  }
 
-  enum Action: Equatable {}
+  enum Action: Equatable {
+    case navigation(NavigationActionOf<Destination>)
+  }
 
   var body: some ReducerProtocol<State, Action> {
-    EmptyReducer()
+    Reduce { state, action in
+      switch action {
+      case .navigation(.element(id: _, .counter(.pushCounterButtonTapped))),
+          .navigation(.element(id: _, .timer(.pushCounterButtonTapped))):
+        state.navigation.append(.counter(.init()))
+        return .none
+
+      case .navigation(.element(id: _, .counter(.pushTimerButtonTapped))),
+          .navigation(.element(id: _, .timer(.pushTimerButtonTapped))):
+        state.navigation.append(.timer(.init()))
+        return .none
+
+      case .navigation(_):
+        return .none
+      }
+    }
+    .navigationDestination(
+      \.$navigation,
+       action: /Action.navigation,
+       destinations: Destination.init
+    )
   }
 }
 
@@ -27,7 +51,13 @@ final class ExampleViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let navigationController = NavigationControllerWithStore()
+    let navigationController = NavigationControllerWithStore<Destination>(
+      store: store.scope(
+        state: \.$navigation,
+        action: Example.Action.navigation
+      ),
+      elementViewController: DestinationViewController.init(store:)
+    )
     addChild(navigationController)
     view.addSubview(navigationController.view)
     navigationController.view.frame = view.bounds

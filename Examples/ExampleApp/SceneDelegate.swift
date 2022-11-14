@@ -12,7 +12,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = scene as? UIWindowScene else { return }
     window = UIWindow(windowScene: windowScene)
     window?.rootViewController = ExampleViewController(store: Store(
-      initialState: Example.State(),
+      initialState: Example.State(navigation: [
+        .counter(.init()),
+      ]),
       reducer: Example()
     ))
     window?.makeKeyAndVisible()
