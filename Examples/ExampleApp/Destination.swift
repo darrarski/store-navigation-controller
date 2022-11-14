@@ -24,57 +24,26 @@ struct Destination: ReducerProtocol {
   }
 }
 
-final class DestinationViewController: UIViewController, NavigationStateElementViewController {
-  init(navigationId: AnyHashable, store: StoreOf<Destination>) {
-    self.navigationId = navigationId
-    self.store = store
-    self.viewStore = ViewStore(store)
-    super.init(nibName: nil, bundle: nil)
-
-    store.scope(
-      state: (/Destination.State.counter).extract(from:),
-      action: Destination.Action.counter
+func destinationViewController(
+  destination: NavigationStateOf<Destination>.Element,
+  store: StoreOf<Destination>
+) -> NavigationStateElementViewController {
+  switch destination.element {
+  case .counter(let state):
+    return CounterViewController(
+      navigationId: destination.id,
+      store: store.scope(
+        state: { (/Destination.State.counter).extract(from: $0) ?? state },
+        action: Destination.Action.counter
+      )
     )
-    .ifLet { [unowned self] store in
-      viewController = CounterViewController(navigationId: navigationId, store: store)
-    }
-    .store(in: &cancellables)
-
-    store.scope(
-      state: (/Destination.State.timer).extract(from:),
-      action: Destination.Action.timer
+  case .timer(let state):
+    return TimerViewController(
+      navigationId: destination.id,
+      store: store.scope(
+        state: { (/Destination.State.timer).extract(from: $0) ?? state },
+        action: Destination.Action.timer
+      )
     )
-    .ifLet { [unowned self] store in
-      viewController = TimerViewController(navigationId: navigationId, store: store)
-    }
-    .store(in: &cancellables)
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  let navigationId: AnyHashable
-  let store: StoreOf<Destination>
-  let viewStore: ViewStoreOf<Destination>
-  var cancellables = Set<AnyCancellable>()
-
-  override var navigationItem: UINavigationItem {
-    viewController?.navigationItem ?? super.navigationItem
-  }
-
-  var viewController: UIViewController? {
-    didSet {
-      oldValue?.willMove(toParent: nil)
-      oldValue?.view.removeFromSuperview()
-      oldValue?.removeFromParent()
-
-      if let viewController {
-        addChild(viewController)
-        view.addSubview(viewController.view)
-        viewController.view.frame = view.bounds
-        viewController.didMove(toParent: self)
-      }
-    }
   }
 }
