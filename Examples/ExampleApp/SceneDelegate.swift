@@ -1,3 +1,4 @@
+import ComposableArchitecture
 import UIKit
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -10,7 +11,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   ) {
     guard let windowScene = scene as? UIWindowScene else { return }
     window = UIWindow(windowScene: windowScene)
-    window?.rootViewController = ExampleViewController()
+    window?.rootViewController = ExampleViewController(store: Store(
+      initialState: Example.State(),
+      reducer: Example()
+    ))
     window?.makeKeyAndVisible()
   }
 }
