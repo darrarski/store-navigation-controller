@@ -52,6 +52,7 @@ final class TimerViewController: UIViewController {
     self.store = store
     self.viewStore = ViewStore(store)
     super.init(nibName: nil, bundle: nil)
+    title = "Timer"
   }
 
   required init?(coder: NSCoder) {
