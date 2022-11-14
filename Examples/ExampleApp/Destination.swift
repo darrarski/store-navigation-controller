@@ -1,5 +1,6 @@
 import Combine
 import ComposableArchitecture
+import StoreNavigationController
 import UIKit
 
 struct Destination: ReducerProtocol {
@@ -23,8 +24,9 @@ struct Destination: ReducerProtocol {
   }
 }
 
-final class DestinationViewController: UIViewController {
-  init(store: StoreOf<Destination>) {
+final class DestinationViewController: UIViewController, NavigationStateElementViewController {
+  init(navigationId: AnyHashable, store: StoreOf<Destination>) {
+    self.navigationId = navigationId
     self.store = store
     self.viewStore = ViewStore(store)
     super.init(nibName: nil, bundle: nil)
@@ -52,6 +54,7 @@ final class DestinationViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
 
+  let navigationId: AnyHashable
   let store: StoreOf<Destination>
   let viewStore: ViewStoreOf<Destination>
   var cancellables = Set<AnyCancellable>()
