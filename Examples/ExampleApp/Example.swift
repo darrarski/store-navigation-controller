@@ -1,3 +1,4 @@
+import Combine
 import ComposableArchitecture
 import StoreNavigationController
 import UIKit
@@ -39,6 +40,7 @@ struct Example: ReducerProtocol {
 final class ExampleViewController: UIViewController {
   init(store: StoreOf<Example>) {
     self.store = store
+    self.viewStore = ViewStore(store)
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -47,9 +49,13 @@ final class ExampleViewController: UIViewController {
   }
 
   let store: StoreOf<Example>
+  let viewStore: ViewStoreOf<Example>
+  var cancellables = Set<AnyCancellable>()
+  let sumLabel = UILabel()
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    view.backgroundColor = .systemBackground
 
     let navigationController = NavigationControllerWithStore<Destination>(
       store: store.scope(
@@ -60,7 +66,33 @@ final class ExampleViewController: UIViewController {
     )
     addChild(navigationController)
     view.addSubview(navigationController.view)
-    navigationController.view.frame = view.bounds
+    navigationController.view.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(sumLabel)
+    sumLabel.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      navigationController.view.topAnchor.constraint(equalTo: view.topAnchor),
+      navigationController.view.leftAnchor.constraint(equalTo: view.leftAnchor),
+      navigationController.view.rightAnchor.constraint(equalTo: view.rightAnchor),
+      sumLabel.topAnchor.constraint(equalTo: navigationController.view.bottomAnchor),
+      sumLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      sumLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+    ])
     navigationController.didMove(toParent: self)
+
+    viewStore.publisher
+      .map {
+        $0.navigation.map { state in
+          switch state {
+          case .timer(let state): return state.value
+          case .counter(let state): return state.value
+          }
+        }
+        .reduce(Int.zero, +)
+      }
+      .removeDuplicates()
+      .sink { [unowned self] sum in
+        sumLabel.text = "Sum: \(sum)"
+      }
+      .store(in: &cancellables)
   }
 }
