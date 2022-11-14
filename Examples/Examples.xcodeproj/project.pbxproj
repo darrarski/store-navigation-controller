@@ -15,6 +15,7 @@
 		31BD499D2922510A00345FE1 /* StoreNavigationController in Frameworks */ = {isa = PBXBuildFile; productRef = 31BD499C2922510A00345FE1 /* StoreNavigationController */; };
 		31BD499F292268B700345FE1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD499E292268B700345FE1 /* Timer.swift */; };
 		31BD49A129226E0500345FE1 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD49A029226E0500345FE1 /* Counter.swift */; };
+		31BD49A32922712F00345FE1 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD49A22922712F00345FE1 /* Destination.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		31BD499529224D4900345FE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31BD499E292268B700345FE1 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		31BD49A029226E0500345FE1 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
+		31BD49A22922712F00345FE1 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				31BD498729224D4800345FE1 /* AppDelegate.swift */,
 				31BD498929224D4800345FE1 /* SceneDelegate.swift */,
 				31BD498B29224D4800345FE1 /* Example.swift */,
+				31BD49A22922712F00345FE1 /* Destination.swift */,
 				31BD49A029226E0500345FE1 /* Counter.swift */,
 				31BD499E292268B700345FE1 /* Timer.swift */,
 				31BD499029224D4800345FE1 /* Assets.xcassets */,
@@ -155,6 +158,7 @@
 			files = (
 				31BD49A129226E0500345FE1 /* Counter.swift in Sources */,
 				31BD498C29224D4800345FE1 /* Example.swift in Sources */,
+				31BD49A32922712F00345FE1 /* Destination.swift in Sources */,
 				31BD498829224D4800345FE1 /* AppDelegate.swift in Sources */,
 				31BD498A29224D4800345FE1 /* SceneDelegate.swift in Sources */,
 				31BD499F292268B700345FE1 /* Timer.swift in Sources */,
