@@ -14,7 +14,7 @@ where Element: ReducerProtocol,
       Element.State: Hashable
 {
   public typealias ElementViewController = NavigationStateElementViewController
-  public typealias MakeElementViewController = (AnyHashable, StoreOf<Element>) -> ElementViewController
+  public typealias MakeElementViewController = (NavigationStateOf<Element>.Element, StoreOf<Element>) -> ElementViewController
 
   public init(
     store: Store<NavigationStateOf<Element>, NavigationActionOf<Element>>,
@@ -61,7 +61,7 @@ where Element: ReducerProtocol,
             .first(where: { $0.navigationId == destination.id }) {
             return viewController
           }
-          return elementViewController(destination.id, store.scope(
+          return elementViewController(destination, store.scope(
             state: { $0[id: destination.id] ?? destination.element },
             action: { .element(id: destination.id, $0) }
           ))

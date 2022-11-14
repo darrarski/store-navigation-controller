@@ -62,7 +62,9 @@ final class ExampleViewController: UIViewController {
         state: \.$navigation,
         action: Example.Action.navigation
       ),
-      elementViewController: DestinationViewController.init(navigationId:store:)
+      elementViewController: { destination, store in
+        DestinationViewController(navigationId: destination.id, store: store)
+      }
     )
     addChild(navigationController)
     view.addSubview(navigationController.view)
