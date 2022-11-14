@@ -1,5 +1,6 @@
 import Combine
 import ComposableArchitecture
+import StoreNavigationController
 import UIKit
 
 struct Timer: ReducerProtocol {
@@ -47,8 +48,9 @@ struct Timer: ReducerProtocol {
   }
 }
 
-final class TimerViewController: UIViewController {
-  init(store: StoreOf<Timer>) {
+final class TimerViewController: UIViewController, NavigationStateElementViewController {
+  init(navigationId: AnyHashable, store: StoreOf<Timer>) {
+    self.navigationId = navigationId
     self.store = store
     self.viewStore = ViewStore(store)
     super.init(nibName: nil, bundle: nil)
@@ -58,6 +60,7 @@ final class TimerViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
 
+  let navigationId: AnyHashable
   let store: StoreOf<Timer>
   let viewStore: ViewStoreOf<Timer>
   var cancellables = Set<AnyCancellable>()

@@ -36,7 +36,7 @@ final class DestinationViewController: UIViewController, NavigationStateElementV
       action: Destination.Action.counter
     )
     .ifLet { [unowned self] store in
-      viewController = CounterViewController(store: store)
+      viewController = CounterViewController(navigationId: navigationId, store: store)
     }
     .store(in: &cancellables)
 
@@ -45,7 +45,7 @@ final class DestinationViewController: UIViewController, NavigationStateElementV
       action: Destination.Action.timer
     )
     .ifLet { [unowned self] store in
-      viewController = TimerViewController(store: store)
+      viewController = TimerViewController(navigationId: navigationId, store: store)
     }
     .store(in: &cancellables)
   }
