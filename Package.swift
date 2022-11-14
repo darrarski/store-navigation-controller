@@ -9,9 +9,15 @@ let package = Package(
   products: [
     .library(name: "StoreNavigationController", targets: ["StoreNavigationController"]),
   ],
+  dependencies: [
+    .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", branch: "navigation"),
+  ],
   targets: [
     .target(
-      name: "StoreNavigationController"
+      name: "StoreNavigationController",
+      dependencies: [
+        .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+      ]
     ),
     .testTarget(
       name: "StoreNavigationControllerTests",
