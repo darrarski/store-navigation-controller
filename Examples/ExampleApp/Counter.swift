@@ -34,7 +34,7 @@ struct Counter: ReducerProtocol {
   }
 }
 
-final class CounterViewController: UIViewController, NavigationStateElementViewController {
+final class CounterViewController: UIViewController, NavigationDestinationViewController {
   init(navigationId: AnyHashable, store: StoreOf<Counter>) {
     self.navigationId = navigationId
     self.store = store

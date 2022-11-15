@@ -48,7 +48,7 @@ struct Timer: ReducerProtocol {
   }
 }
 
-final class TimerViewController: UIViewController, NavigationStateElementViewController {
+final class TimerViewController: UIViewController, NavigationDestinationViewController {
   init(navigationId: AnyHashable, store: StoreOf<Timer>) {
     self.navigationId = navigationId
     self.store = store

@@ -27,7 +27,7 @@ struct Destination: ReducerProtocol {
 func destinationViewController(
   destination: NavigationStateOf<Destination>.Element,
   store: StoreOf<Destination>
-) -> NavigationStateElementViewController {
+) -> NavigationDestinationViewController {
   switch destination.element {
   case .counter(let state):
     return CounterViewController(

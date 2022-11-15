@@ -3,28 +3,28 @@ import Combine
 import ComposableArchitecture
 import UIKit
 
-public protocol NavigationStateElementViewController: UIViewController {
+public protocol NavigationDestinationViewController: UIViewController {
   var navigationId: AnyHashable { get }
 }
 
-public final class NavigationControllerWithStore<Element>
+public final class NavigationControllerWithStore<Destination>
 : UINavigationController,
   UINavigationControllerDelegate
-where Element: ReducerProtocol,
-      Element.State: Hashable
+where Destination: ReducerProtocol,
+      Destination.State: Hashable
 {
-  public typealias ElementViewController = NavigationStateElementViewController
-  public typealias MakeElementViewController = (NavigationStateOf<Element>.Element, StoreOf<Element>) -> ElementViewController
+  public typealias DestinationViewController = NavigationDestinationViewController
+  public typealias MakeDestinationViewController = (NavigationStateOf<Destination>.Element, StoreOf<Destination>) -> DestinationViewController
 
   public init(
-    store: Store<NavigationStateOf<Element>, NavigationActionOf<Element>>,
+    store: Store<NavigationStateOf<Destination>, NavigationActionOf<Destination>>,
     navigationController: UINavigationController = .init(navigationBarClass: nil, toolbarClass: nil),
-    elementViewController: @escaping MakeElementViewController
+    destinationViewController: @escaping MakeDestinationViewController
   ) {
     self.store = store
     self.viewStore = ViewStore(self.store)
     self.controlledNavigationController = navigationController
-    self.elementViewController = elementViewController
+    self.destinationViewController = destinationViewController
     super.init(navigationBarClass: nil, toolbarClass: nil)
     navigationController.delegate = self
   }
@@ -33,10 +33,10 @@ where Element: ReducerProtocol,
     fatalError("init(coder:) has not been implemented")
   }
 
-  let store: Store<NavigationStateOf<Element>, NavigationActionOf<Element>>
-  let viewStore: ViewStore<NavigationStateOf<Element>, NavigationActionOf<Element>>
+  let store: Store<NavigationStateOf<Destination>, NavigationActionOf<Destination>>
+  let viewStore: ViewStore<NavigationStateOf<Destination>, NavigationActionOf<Destination>>
   let controlledNavigationController: UINavigationController
-  let elementViewController: MakeElementViewController
+  let destinationViewController: MakeDestinationViewController
   var cancellables = Set<AnyCancellable>()
 
   public override func viewDidLoad() {
@@ -50,18 +50,18 @@ where Element: ReducerProtocol,
     viewStore.publisher
       .removeDuplicates { $0.ids == $1.ids }
       .sink { [unowned self] state in
-        let presentedViewControllers: [ElementViewController] = controlledNavigationController
+        let presentedViewControllers: [DestinationViewController] = controlledNavigationController
           .viewControllers
-          .compactMap { $0 as? ElementViewController }
+          .compactMap { $0 as? DestinationViewController }
         if state.ids == OrderedSet(presentedViewControllers.map(\.navigationId)) {
           return
         }
-        let viewControllers: [ElementViewController] = state.map { destination in
+        let viewControllers: [DestinationViewController] = state.map { destination in
           if let viewController = presentedViewControllers
             .first(where: { $0.navigationId == destination.id }) {
             return viewController
           }
-          return elementViewController(destination, store.scope(
+          return destinationViewController(destination, store.scope(
             state: { $0[id: destination.id] ?? destination.element },
             action: { .element(id: destination.id, $0) }
           ))
@@ -77,13 +77,13 @@ where Element: ReducerProtocol,
     didShow viewController: UIViewController,
     animated: Bool
   ) {
-    let presentedViewControllers: [ElementViewController] = controlledNavigationController
+    let presentedViewControllers: [DestinationViewController] = controlledNavigationController
       .viewControllers
-      .compactMap { $0 as? ElementViewController }
+      .compactMap { $0 as? DestinationViewController }
     if viewStore.ids == OrderedSet(presentedViewControllers.map(\.navigationId)) {
       return
     }
-    var newState = NavigationStateOf<Element>()
+    var newState = NavigationStateOf<Destination>()
     presentedViewControllers.forEach { viewController in
       let id = viewController.navigationId
       newState[id: id] = viewStore.state[id: id]
