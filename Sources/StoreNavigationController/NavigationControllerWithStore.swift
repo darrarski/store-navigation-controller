@@ -14,7 +14,7 @@ where Destination: ReducerProtocol,
       Destination.State: Hashable
 {
   public typealias DestinationViewController = NavigationDestinationViewController
-  public typealias MakeDestinationViewController = (NavigationStateOf<Destination>.Element, StoreOf<Destination>) -> DestinationViewController
+  public typealias MakeDestinationViewController = @MainActor (NavigationStateOf<Destination>.Element, StoreOf<Destination>) -> DestinationViewController
 
   public init(
     store: Store<NavigationStateOf<Destination>, NavigationActionOf<Destination>>,
