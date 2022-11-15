@@ -10,7 +10,7 @@ let package = Package(
     .library(name: "StoreNavigationController", targets: ["StoreNavigationController"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", branch: "navigation"),
+    .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", revision: "f87cf838803e2b203039fa76e6626f4a63e5c81b"),
     .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.0.3")),
   ],
   targets: [
