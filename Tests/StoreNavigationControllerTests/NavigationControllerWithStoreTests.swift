@@ -31,6 +31,7 @@ final class NavigationControllerWithStoreTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
+    UIView.setAnimationsEnabled(false)
     store = Store(
       initialState: NavigationStateOf<Destination>(),
       reducer: EmptyReducer()
@@ -39,7 +40,7 @@ final class NavigationControllerWithStoreTests: XCTestCase {
         }
     )
     viewStore = ViewStore(store)
-    navigationController = UINavigationController()
+    navigationController = NavigationController()
     sut = NavigationControllerWithStore(
       store: store,
       navigationController: navigationController,
@@ -49,14 +50,62 @@ final class NavigationControllerWithStoreTests: XCTestCase {
 
   override func tearDown() {
     super.tearDown()
+    UIView.setAnimationsEnabled(true)
     sut = nil
     navigationController = nil
     viewStore = nil
     store = nil
   }
 
-  func testExample() throws {
-    // TODO:
-    XCTAssert(true)
+  func testNavigation() throws {
+    // Load view:
+    _ = sut.view
+
+    // Put two elements on the stack:
+    viewStore.send(.setPath(.init(
+      dictionaryLiteral: (1, .init()), (2, .init())
+    )))
+
+    let viewControllers = navigationController.viewControllers
+    XCTAssertNoDifference(
+      viewControllers
+        .map { $0 as? NavigationDestinationViewController }
+        .map(\.?.navigationId),
+      [1, 2]
+    )
+
+    // Push third element on the stack:
+    viewStore.send(.setPath(.init(
+      dictionaryLiteral: (1, .init()), (2, .init()), (3, .init())
+    )))
+
+    XCTAssertNoDifference(
+      navigationController.viewControllers
+        .map { $0 as? NavigationDestinationViewController }
+        .map(\.?.navigationId),
+      [1, 2, 3]
+    )
+    XCTAssertNoDifference(
+      navigationController.viewControllers,
+      viewControllers + [navigationController.viewControllers.last]
+    )
+
+    // Pop view controller:
+    navigationController.popViewController(animated: false)
+    navigationController.delegate?.navigationController?(
+      navigationController,
+      didShow: navigationController.viewControllers.last!,
+      animated: false
+    )
+
+    XCTAssertNoDifference(viewStore.state, .init(
+      dictionaryLiteral: (1, .init()), (2, .init())
+    ))
+  }
+}
+
+private final class NavigationController: UINavigationController {
+  override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
+    super.setViewControllers(viewControllers, animated: false)
   }
 }
