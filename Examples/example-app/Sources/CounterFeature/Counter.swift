@@ -3,19 +3,25 @@ import ComposableArchitecture
 import StoreNavigationController
 import UIKit
 
-struct Counter: ReducerProtocol {
-  struct State: Equatable, Hashable {
-    var value = 0
+public struct CounterComponent: ReducerProtocol {
+  public struct State: Equatable, Hashable {
+    public init(value: Int = 0) {
+      self.value = value
+    }
+
+    public var value = 0
   }
 
-  enum Action: Equatable {
+  public enum Action: Equatable {
     case decrementButtonTapped
     case incrementButtonTapped
     case pushCounterButtonTapped
     case pushTimerButtonTapped
   }
 
-  func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+  public init() {}
+
+  public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
     switch action {
     case .decrementButtonTapped:
       state.value -= 1
@@ -34,8 +40,8 @@ struct Counter: ReducerProtocol {
   }
 }
 
-final class CounterViewController: UIViewController, NavigationDestinationViewController {
-  init(navigationId: AnyHashable, store: StoreOf<Counter>) {
+public final class CounterViewController: UIViewController, NavigationDestinationViewController {
+  public init(navigationId: AnyHashable, store: StoreOf<CounterComponent>) {
     self.navigationId = navigationId
     self.store = store
     self.viewStore = ViewStore(store)
@@ -46,9 +52,9 @@ final class CounterViewController: UIViewController, NavigationDestinationViewCo
     fatalError("init(coder:) has not been implemented")
   }
 
-  let navigationId: AnyHashable
-  let store: StoreOf<Counter>
-  let viewStore: ViewStoreOf<Counter>
+  public let navigationId: AnyHashable
+  let store: StoreOf<CounterComponent>
+  let viewStore: ViewStoreOf<CounterComponent>
   var cancellables = Set<AnyCancellable>()
   let counterLabel = UILabel()
   let decrementButton = UIButton(configuration: .filled())
@@ -56,7 +62,7 @@ final class CounterViewController: UIViewController, NavigationDestinationViewCo
   let pushCounterButton = UIButton(configuration: .filled())
   let pushTimerButton = UIButton(configuration: .filled())
 
-  override func loadView() {
+  public override func loadView() {
     let view = UIView()
     view.backgroundColor = .systemBackground
     counterLabel.textAlignment = .center
@@ -87,7 +93,7 @@ final class CounterViewController: UIViewController, NavigationDestinationViewCo
     self.view = view
   }
 
-  override func viewDidLoad() {
+  public override func viewDidLoad() {
     super.viewDidLoad()
 
     viewStore.publisher.map(\.value)

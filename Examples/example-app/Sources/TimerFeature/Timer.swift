@@ -3,23 +3,30 @@ import ComposableArchitecture
 import StoreNavigationController
 import UIKit
 
-struct Timer: ReducerProtocol {
-  struct State: Equatable, Hashable {
-    var value = 0
-    var isTimerRunning = false
+public struct TimerComponent: ReducerProtocol {
+  public struct State: Equatable, Hashable {
+    public init(value: Int = 0, isTimerRunning: Bool = false) {
+      self.value = value
+      self.isTimerRunning = isTimerRunning
+    }
+
+    public var value = 0
+    public var isTimerRunning = false
   }
 
-  enum Action: Equatable {
+  public enum Action: Equatable {
     case timerButtonTapped
     case timerTick
     case pushCounterButtonTapped
     case pushTimerButtonTapped
   }
 
+  public init() {}
+
   @Dependency(\.mainQueue) var mainQueue
   enum TimerID {}
 
-  func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+  public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
     switch action {
     case .timerButtonTapped:
       if state.isTimerRunning {
@@ -48,8 +55,8 @@ struct Timer: ReducerProtocol {
   }
 }
 
-final class TimerViewController: UIViewController, NavigationDestinationViewController {
-  init(navigationId: AnyHashable, store: StoreOf<Timer>) {
+public final class TimerViewController: UIViewController, NavigationDestinationViewController {
+  public init(navigationId: AnyHashable, store: StoreOf<TimerComponent>) {
     self.navigationId = navigationId
     self.store = store
     self.viewStore = ViewStore(store)
@@ -60,16 +67,16 @@ final class TimerViewController: UIViewController, NavigationDestinationViewCont
     fatalError("init(coder:) has not been implemented")
   }
 
-  let navigationId: AnyHashable
-  let store: StoreOf<Timer>
-  let viewStore: ViewStoreOf<Timer>
+  public let navigationId: AnyHashable
+  let store: StoreOf<TimerComponent>
+  let viewStore: ViewStoreOf<TimerComponent>
   var cancellables = Set<AnyCancellable>()
   let timerLabel = UILabel()
   let timerButton = UIButton(configuration: .filled())
   let pushCounterButton = UIButton(configuration: .filled())
   let pushTimerButton = UIButton(configuration: .filled())
 
-  override func loadView() {
+  public override func loadView() {
     let view = UIView()
     view.backgroundColor = .systemBackground
     timerLabel.textAlignment = .center
@@ -92,7 +99,7 @@ final class TimerViewController: UIViewController, NavigationDestinationViewCont
     self.view = view
   }
 
-  override func viewDidLoad() {
+  public override func viewDidLoad() {
     super.viewDidLoad()
 
     viewStore.publisher.map(\.value)

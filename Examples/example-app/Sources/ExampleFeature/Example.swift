@@ -1,18 +1,26 @@
 import Combine
 import ComposableArchitecture
+import CounterFeature
 import StoreNavigationController
+import TimerFeature
 import UIKit
 
-struct Example: ReducerProtocol {
-  struct State: Equatable {
-    @NavigationStateOf<Destination> var navigation
+public struct ExampleComponent: ReducerProtocol {
+  public struct State: Equatable {
+    public init(navigation: NavigationStateOf<Destination>) {
+      self._navigation = navigation
+    }
+
+    @NavigationStateOf<Destination> public var navigation
   }
 
-  enum Action: Equatable {
+  public enum Action: Equatable {
     case navigation(NavigationActionOf<Destination>)
   }
 
-  var body: some ReducerProtocol<State, Action> {
+  public init() {}
+
+  public var body: some ReducerProtocol<State, Action> {
     Reduce { state, action in
       switch action {
       case .navigation(.element(id: _, .counter(.pushCounterButtonTapped))),
@@ -37,8 +45,8 @@ struct Example: ReducerProtocol {
   }
 }
 
-final class ExampleViewController: UIViewController {
-  init(store: StoreOf<Example>) {
+public final class ExampleViewController: UIViewController {
+  public init(store: StoreOf<ExampleComponent>) {
     self.store = store
     self.viewStore = ViewStore(store)
     super.init(nibName: nil, bundle: nil)
@@ -48,19 +56,19 @@ final class ExampleViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
 
-  let store: StoreOf<Example>
-  let viewStore: ViewStoreOf<Example>
+  let store: StoreOf<ExampleComponent>
+  let viewStore: ViewStoreOf<ExampleComponent>
   var cancellables = Set<AnyCancellable>()
   let sumLabel = UILabel()
 
-  override func viewDidLoad() {
+  public override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
 
     let navigationController = NavigationControllerWithStore<Destination>(
       store: store.scope(
         state: \.$navigation,
-        action: Example.Action.navigation
+        action: ExampleComponent.Action.navigation
       ),
       destinationViewController: destinationViewController(destination:store:)
     )

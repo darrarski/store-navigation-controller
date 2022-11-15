@@ -7,28 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31BD498829224D4800345FE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD498729224D4800345FE1 /* AppDelegate.swift */; };
 		31BD498A29224D4800345FE1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD498929224D4800345FE1 /* SceneDelegate.swift */; };
-		31BD498C29224D4800345FE1 /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD498B29224D4800345FE1 /* Example.swift */; };
 		31BD499129224D4800345FE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31BD499029224D4800345FE1 /* Assets.xcassets */; };
 		31BD499429224D4900345FE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31BD499229224D4900345FE1 /* LaunchScreen.storyboard */; };
-		31BD499D2922510A00345FE1 /* StoreNavigationController in Frameworks */ = {isa = PBXBuildFile; productRef = 31BD499C2922510A00345FE1 /* StoreNavigationController */; };
-		31BD499F292268B700345FE1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD499E292268B700345FE1 /* Timer.swift */; };
-		31BD49A129226E0500345FE1 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD49A029226E0500345FE1 /* Counter.swift */; };
-		31BD49A32922712F00345FE1 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BD49A22922712F00345FE1 /* Destination.swift */; };
+		31FF5CD02923C1D50009DF54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FF5CCF2923C1D50009DF54 /* AppDelegate.swift */; };
+		31FF5CD22923C1E40009DF54 /* ExampleFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 31FF5CD12923C1E40009DF54 /* ExampleFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		319EFA052923BB84009AC4D5 /* example-app */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "example-app"; sourceTree = "<group>"; };
 		31BD498429224D4800345FE1 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		31BD498729224D4800345FE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31BD498929224D4800345FE1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		31BD498B29224D4800345FE1 /* Example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example.swift; sourceTree = "<group>"; };
 		31BD499029224D4800345FE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		31BD499329224D4900345FE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		31BD499529224D4900345FE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		31BD499E292268B700345FE1 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
-		31BD49A029226E0500345FE1 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
-		31BD49A22922712F00345FE1 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
+		31FF5CCF2923C1D50009DF54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,16 +29,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31BD499D2922510A00345FE1 /* StoreNavigationController in Frameworks */,
+				31FF5CD22923C1E40009DF54 /* ExampleFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		319EFA042923BB84009AC4D5 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				319EFA052923BB84009AC4D5 /* example-app */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		31BD497B29224D4800345FE1 = {
 			isa = PBXGroup;
 			children = (
+				319EFA042923BB84009AC4D5 /* Packages */,
 				31BD498629224D4800345FE1 /* ExampleApp */,
 				31BD498529224D4800345FE1 /* Products */,
 				31BD499B2922510A00345FE1 /* Frameworks */,
@@ -63,12 +65,8 @@
 		31BD498629224D4800345FE1 /* ExampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				31BD498729224D4800345FE1 /* AppDelegate.swift */,
+				31FF5CCF2923C1D50009DF54 /* AppDelegate.swift */,
 				31BD498929224D4800345FE1 /* SceneDelegate.swift */,
-				31BD498B29224D4800345FE1 /* Example.swift */,
-				31BD49A22922712F00345FE1 /* Destination.swift */,
-				31BD49A029226E0500345FE1 /* Counter.swift */,
-				31BD499E292268B700345FE1 /* Timer.swift */,
 				31BD499029224D4800345FE1 /* Assets.xcassets */,
 				31BD499229224D4900345FE1 /* LaunchScreen.storyboard */,
 				31BD499529224D4900345FE1 /* Info.plist */,
@@ -100,7 +98,7 @@
 			);
 			name = ExampleApp;
 			packageProductDependencies = (
-				31BD499C2922510A00345FE1 /* StoreNavigationController */,
+				31FF5CD12923C1E40009DF54 /* ExampleFeature */,
 			);
 			productName = NavigationApp;
 			productReference = 31BD498429224D4800345FE1 /* ExampleApp.app */;
@@ -156,12 +154,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31BD49A129226E0500345FE1 /* Counter.swift in Sources */,
-				31BD498C29224D4800345FE1 /* Example.swift in Sources */,
-				31BD49A32922712F00345FE1 /* Destination.swift in Sources */,
-				31BD498829224D4800345FE1 /* AppDelegate.swift in Sources */,
+				31FF5CD02923C1D50009DF54 /* AppDelegate.swift in Sources */,
 				31BD498A29224D4800345FE1 /* SceneDelegate.swift in Sources */,
-				31BD499F292268B700345FE1 /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,9 +371,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		31BD499C2922510A00345FE1 /* StoreNavigationController */ = {
+		31FF5CD12923C1E40009DF54 /* ExampleFeature */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = StoreNavigationController;
+			productName = ExampleFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

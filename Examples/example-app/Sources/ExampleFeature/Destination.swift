@@ -1,25 +1,29 @@
 import Combine
 import ComposableArchitecture
+import CounterFeature
 import StoreNavigationController
+import TimerFeature
 import UIKit
 
-struct Destination: ReducerProtocol {
-  enum State: Equatable, Hashable {
-    case timer(Timer.State)
-    case counter(Counter.State)
+public struct Destination: ReducerProtocol {
+  public enum State: Equatable, Hashable {
+    case timer(TimerComponent.State)
+    case counter(CounterComponent.State)
   }
 
-  enum Action: Equatable {
-    case timer(Timer.Action)
-    case counter(Counter.Action)
+  public enum Action: Equatable {
+    case timer(TimerComponent.Action)
+    case counter(CounterComponent.Action)
   }
 
-  var body: some ReducerProtocol<State, Action> {
+  public init() {}
+
+  public var body: some ReducerProtocol<State, Action> {
     Scope(state: /State.counter, action: /Action.counter) {
-      Counter()
+      CounterComponent()
     }
     Scope(state: /State.timer, action: /Action.timer) {
-      Timer()
+      TimerComponent()
     }
   }
 }
